@@ -1,44 +1,5 @@
-:root {
-  --font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
-  --line-height: 1.5;
-  --font-weight-base: 400;
-
-  --color-text-light: rgba(255, 255, 255, 0.87);
-  --color-text-dark: #213547;
-  --color-bg-light: #ffffff;
-  --color-bg-dark: #242424;
-  --color-primary: #646cff;
-  --color-primary-hover: #535bf2;
-
-  --button-bg-light: #f9f9f9;
-  --button-bg-dark: #1a1a1a;
-  --button-radius: 8px;
-  --transition-speed: 0.25s;
-
-  color-scheme: light dark;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --color-text: var(--color-text-dark);
-    --color-bg: var(--color-bg-light);
-    --button-bg: var(--button-bg-light);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-text: var(--color-text-light);
-    --color-bg: var(--color-bg-dark);
-    --button-bg: var(--button-bg-dark);
-  }
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+@import "./vendor/normalize.css";
+@import "./vendor/fonts/fonts.css";
 
 html,
 body,
@@ -46,58 +7,10 @@ body,
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: "Cabinet Grotesk", system-ui, sans-serif;
-  line-height: var(--line-height);
-  font-weight: var(--font-weight-base);
+}
+
+body {
+  font-family: "Cabinet Grotesk";
+  background-color: #f7f7f7;
   color: #000000;
-  background-color: var(--color-bg);
-}
-
-a {
-  color: var(--color-primary);
-  font-weight: 500;
-  text-decoration: none;
-}
-a:hover,
-a:focus {
-  color: var(--color-primary-hover);
-  text-decoration: underline;
-}
-
-h1 {
-  font-family: "Cabinet Grotesk", sans-serif;
-  font-weight: 700;
-  font-size: 3.2em;
-  line-height: 1.1;
-  margin: 0 0 0.5em;
-}
-
-button {
-  font-family: inherit;
-  font-weight: 500;
-  font-size: 1em;
-  padding: 0.6em 1.2em;
-  border: 1px solid transparent;
-  border-radius: var(--button-radius);
-  background-color: var(--button-bg);
-  color: var(--color-text);
-  cursor: pointer;
-  transition: border-color var(--transition-speed);
-}
-button:hover {
-  border-color: var(--color-primary);
-}
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-.flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-img {
-  max-width: 100%;
-  display: block;
 }
