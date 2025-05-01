@@ -1,5 +1,14 @@
-import React from "react";
-import "./Main.css";
-export default function Main() {
-  return <main>Main</main>;
+import WeatherCard from "../WeatherCard/WeatherCard";
+function Main() {
+  return (
+    <main>
+      <WeatherCard />
+      <section className="cards">
+        <p className="cards__text">Today is 75° F / You may want to wear:</p>
+        {/* TODO - add cards */}
+      </section>
+    </main>
+  );
 }
+
+export default Main;

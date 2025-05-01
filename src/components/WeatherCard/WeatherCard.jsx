@@ -1,6 +1,13 @@
-import React from "react";
 import "./WeatherCard.css";
+import sunny from "../../assets/sunny.png";
 
-export default function WeatherCard() {
-  return <div className="weather-card">Weather</div>;
+function WeatherCard() {
+  return (
+    <section className="weather-card">
+      <p className="weather-card__temp">75° F</p>
+      <img src={sunny} alt="sunny" className="weather-card__image" />
+    </section>
+  );
 }
+
+export default WeatherCard;
