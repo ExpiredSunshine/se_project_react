@@ -1,3 +1,26 @@
 main {
   min-height: 100vh;
 }
+
+.cards {
+  margin: 0;
+  padding: 40px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
+
+.cards__text {
+  margin: 0;
+  font-size: 14px;
+}
+
+.cards__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 328px);
+  justify-content: space-between;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
