@@ -97,3 +97,7 @@
   background-color: #0000004d;
   color: #ffffff;
 }
+
+.modal__submit:enabled {
+  background-color: #000;
+}
