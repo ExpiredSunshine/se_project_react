@@ -12,8 +12,11 @@ import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit
 
 function App() {
   const [weatherData, setWeatherData] = useState({
+    city: "",
     type: "",
-    temp: { F: 999 },
+    temp: { F: 999, C: 999 },
+    condition: "",
+    isDay: true,
   });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
