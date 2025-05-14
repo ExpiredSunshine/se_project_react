@@ -16,9 +16,11 @@
 }
 
 .modal__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: #fff;
   padding: 20px 0 32px 32px;
-  line-height: 24px;
 }
 
 .modal__caption {
@@ -40,4 +42,17 @@
   background: url("../../assets/close-white.png") no-repeat;
   background-size: contain;
   cursor: pointer;
+}
+
+.modal__item-delete {
+  padding: 0;
+  background: transparent;
+  position: absolute;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  color: #ff4d00;
+  font-size: 20px;
+  bottom: 62.5px;
+  right: 32px;
 }
