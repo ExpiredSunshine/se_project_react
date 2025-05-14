@@ -1,6 +1,5 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useState } from "react";
-import { use } from "react";
 
 export default function AddItemModal({
   handleCloseClick,
