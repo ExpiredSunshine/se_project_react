@@ -17,7 +17,11 @@ function postItem(item) {
 }
 
 function deleteItem(id) {
-  return fetch(`http://localhost:3001/items/${id}`, { method: "DELETE" });
+  return fetch(`${baseUrl}/items/${id}`, {
+    method: "DELETE",
+  }).then((res) =>
+    res.ok ? res.json() : Promise.reject(`Delete failed: ${res.status}`)
+  );
 }
 
 export { getItems, postItem, deleteItem };
