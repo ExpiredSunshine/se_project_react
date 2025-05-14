@@ -3,7 +3,7 @@ import "./ItemModal.css";
 function ItemModal({ activeModal, card, handleCloseClick }) {
   return (
     <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
-      <div className="modal__content modal__content_type_image">
+      <div className="modal__content-item modal__content_type_image">
         <button
           onClick={handleCloseClick}
           type="button"

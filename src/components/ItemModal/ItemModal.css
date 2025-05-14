@@ -1,5 +1,11 @@
+.modal__content-item {
+  background-color: #fff;
+  position: relative;
+  max-width: 496px;
+  border-radius: 20px;
+}
+
 .modal__content_type_image {
-  padding: 0;
   overflow: hidden;
 }
 

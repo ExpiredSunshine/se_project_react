@@ -33,3 +33,16 @@
 .header__username {
   margin: 0;
 }
+
+.header__link {
+  text-decoration: none;
+  color: black;
+}
+
+.header__avatar {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+}

@@ -1,0 +1,11 @@
+.profile {
+  display: flex;
+}
+
+.profile__sidebar {
+  margin: 0 116px 0 0;
+}
+
+.profile__clothing-items {
+  margin-left: auto;
+}
