@@ -43,16 +43,14 @@ function App() {
   };
 
   const handleAddItemModalSubmit = (data) => {
-    postItem({
+    return postItem({
       name: data.name,
       imageUrl: data.imageUrl,
       weather: data.weather,
-    })
-      .then((newItem) => {
-        setClothingItems((prevItems) => [newItem, ...prevItems]);
-        closeActiveModal();
-      })
-      .catch(console.error);
+    }).then((newItem) => {
+      setClothingItems((prevItems) => [newItem, ...prevItems]);
+      closeActiveModal();
+    });
   };
 
   const handleItemDelete = (card) => {

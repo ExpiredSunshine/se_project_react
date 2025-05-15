@@ -35,13 +35,16 @@ export default function AddItemModal({
     setWeather(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onAddItemModalSubmit({ name, imageUrl, weather });
-    // empty inputs
-    setName("");
-    setImageUrl("");
-    setWeather("");
+    try {
+      await onAddItemModalSubmit({ name, imageUrl, weather });
+      setName("");
+      setImageUrl("");
+      setWeather("");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
