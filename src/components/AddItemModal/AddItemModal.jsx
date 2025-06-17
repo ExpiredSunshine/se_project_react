@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useState } from "react";
 
@@ -6,6 +8,7 @@ export default function AddItemModal({
   isOpen,
   onAddItemModalSubmit,
 }) {
+  const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");

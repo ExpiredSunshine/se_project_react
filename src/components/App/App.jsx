@@ -80,7 +80,11 @@ function App() {
   const closeLogin = () => setShowLogin(false);
 
   const handleRegister = ({ name, avatar, email, password }) => {
-    return signUp({ name, avatar, email, password })
+    const payload = { name, email, password };
+    if (avatar && avatar.trim() !== "") {
+      payload.avatar = avatar.trim();
+    }
+    return signUp(payload)
       .then(() => signIn({ email, password }))
       .then(({ token }) => {
         localStorage.setItem("jwt", token);

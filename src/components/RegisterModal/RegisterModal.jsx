@@ -106,7 +106,6 @@ export default function RegisterModal({
           id="reg-avatar"
           className="modal__input"
           placeholder="Avatar URL"
-          required
           value={avatar}
           onChange={handleAvatarChange}
         />

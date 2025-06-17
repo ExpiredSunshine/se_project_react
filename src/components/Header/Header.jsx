@@ -58,11 +58,17 @@ export default function Header({
       {isLoggedIn && currentUser && (
         <div className="header__user-container">
           <Link to="/profile">
-            <img
-              src={currentUser.data.avatar}
-              alt={currentUser.data.name}
-              className="header__avatar"
-            />
+            {currentUser.data.avatar ? (
+              <img
+                src={currentUser.data.avatar}
+                alt={currentUser.data.name}
+                className="header__avatar"
+              />
+            ) : (
+              <div className="header__avatar header__avatar--placeholder">
+                {currentUser.data.name.charAt(0).toUpperCase()}
+              </div>
+            )}
           </Link>
           <p className="header__username">{currentUser.data.name}</p>
           <button
