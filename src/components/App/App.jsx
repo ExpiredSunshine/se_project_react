@@ -40,6 +40,7 @@ function App() {
   // State: Authentication -----
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [isAuthChecked, setIsAuthChecked] = useState(false);
 
   // State: Modals -----
   const [showRegister, setShowRegister] = useState(false);
@@ -148,15 +149,17 @@ function App() {
   // Effect: Rehydrate Authentication -----
   useEffect(() => {
     const token = localStorage.getItem("jwt");
-    if (!token) return;
+    if (!token) {
+      setIsAuthChecked(true);
+      return;
+    }
     getCurrentUser(token)
       .then((user) => {
         setCurrentUser(user);
         setIsLoggedIn(true);
       })
-      .catch(() => {
-        localStorage.removeItem("jwt");
-      });
+      .catch(() => localStorage.removeItem("jwt"))
+      .finally(() => setIsAuthChecked(true));
   }, []);
 
   // Rendering -----
@@ -190,7 +193,10 @@ function App() {
               <Route
                 path="/profile"
                 element={
-                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <ProtectedRoute
+                    isLoggedIn={isLoggedIn}
+                    isAuthChecked={isAuthChecked}
+                  >
                     <Profile
                       handleAddClick={handleAddClick}
                       onCardClick={handleCardClick}
