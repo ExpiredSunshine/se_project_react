@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
+
+// Utils & API
 import { coordinates, APIkey } from "../../utils/constants.js";
+import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
+import { getItems, postItem, deleteItem } from "../../utils/api.js";
+import { signUp, signIn, getCurrentUser } from "../../utils/auth.js";
+
+// UI Components
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import Footer from "../Footer/Footer.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
-import Profile from "../Profile/Profile.jsx";
-import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.jsx";
-import AddItemModal from "../AddItemModal/AddItemModal.jsx";
-import { getItems, postItem, deleteItem } from "../../utils/api.js";
-
-import { signUp, signIn, getCurrentUser } from "../../utils/auth.js";
 import RegisterModal from "../RegisterModal/RegisterModal.jsx";
+import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import LoginModal from "../LoginModal/LoginModal.jsx";
+import Profile from "../Profile/Profile.jsx";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
+
+// Contexts
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.jsx";
 import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
 
 function App() {
+  // ----- State: Data & UI -----
   const [weatherData, setWeatherData] = useState({
     city: "",
     type: "",
@@ -27,13 +33,19 @@ function App() {
     isDay: true,
   });
   const [clothingItems, setClothingItems] = useState([]);
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
+  // ----- State: Authentication -----
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
+  // ----- State: Modals -----
+  const [showRegister, setShowRegister] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+
+  // ----- UI Handlers -----
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
@@ -43,14 +55,10 @@ function App() {
     setSelectedCard(card);
   };
 
-  const handleAddClick = () => {
-    setActiveModal("add-garment");
-  };
+  const handleAddClick = () => setActiveModal("add-garment");
+  const closeActiveModal = () => setActiveModal("");
 
-  const closeActiveModal = () => {
-    setActiveModal("");
-  };
-
+  // ----- Data Handlers: Items -----
   const handleAddItemModalSubmit = (data) => {
     return postItem({
       name: data.name,
@@ -71,14 +79,13 @@ function App() {
       .catch(console.error);
   };
 
-  const [showRegister, setShowRegister] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
-
+  // ----- Modal Toggles -----
   const openRegister = () => setShowRegister(true);
   const closeRegister = () => setShowRegister(false);
   const openLogin = () => setShowLogin(true);
   const closeLogin = () => setShowLogin(false);
 
+  // ----- Authentication Logic -----
   const handleRegister = ({ name, avatar, email, password }) => {
     const payload = { name, email, password };
     if (avatar && avatar.trim() !== "") {
@@ -124,23 +131,21 @@ function App() {
     setCurrentUser(null);
   };
 
+  // ----- Effects: Initial Data Fetch -----
   useEffect(() => {
     getWeather(coordinates, APIkey)
-      .then((res) => {
-        const filteredData = filterWeatherData(res);
-        setWeatherData(filteredData);
-      })
+      .then((res) => filterWeatherData(res))
+      .then(setWeatherData)
       .catch(console.error);
   }, []);
 
   useEffect(() => {
     getItems()
-      .then(({ data }) => {
-        setClothingItems(data.reverse());
-      })
+      .then(({ data }) => setClothingItems(data.reverse()))
       .catch(console.error);
   }, []);
 
+  // ----- Effect: Rehydrate Authentication -----
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (!token) return;
@@ -154,6 +159,7 @@ function App() {
       });
   }, []);
 
+  // ----- Rendering -----
   return (
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
@@ -169,6 +175,7 @@ function App() {
               onLoginClick={openLogin}
               onSignOutClick={handleSignOut}
             />
+
             <Routes>
               <Route
                 path="/"
