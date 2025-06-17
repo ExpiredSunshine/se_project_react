@@ -1,10 +1,17 @@
 import { useContext } from "react";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
-import "./Header.css";
-import logo from "../../assets/logo.png";
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
 
+// Contexts -----
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+
+// Assets & Styles -----
+import logo from "../../assets/logo.png";
+import "./Header.css";
+
+// UI Components -----
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+
+// Header Component -----
 export default function Header({
   handleAddClick,
   weatherData,
@@ -13,8 +20,10 @@ export default function Header({
   onRegisterClick,
   onSignOutClick,
 }) {
+  // Current user from context -----
   const currentUser = useContext(CurrentUserContext);
 
+  // Current date display -----
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -25,11 +34,13 @@ export default function Header({
       <Link to="/">
         <img src={logo} className="header__logo" alt="Logo" />
       </Link>
+
       <p className="header__date-and-location">
         {currentDate}, {weatherData.city}
       </p>
 
       <ToggleSwitch />
+
       {!isLoggedIn && (
         <div className="header__auth-buttons">
           <button
@@ -48,13 +59,15 @@ export default function Header({
           </button>
         </div>
       )}
+
       <button
-        onClick={handleAddClick}
         type="button"
         className="header__add-clothes-btn"
+        onClick={handleAddClick}
       >
         + Add Clothes
       </button>
+
       {isLoggedIn && currentUser && (
         <div className="header__user-container">
           <Link to="/profile">
@@ -70,7 +83,9 @@ export default function Header({
               </div>
             )}
           </Link>
+
           <p className="header__username">{currentUser.data.name}</p>
+
           <button
             type="button"
             className="header__button"

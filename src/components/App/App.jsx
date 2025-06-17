@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
-// Utils & API
+// Utils & API -----
 import { coordinates, APIkey } from "../../utils/constants.js";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 import { getItems, postItem, deleteItem } from "../../utils/api.js";
 import { signUp, signIn, getCurrentUser } from "../../utils/auth.js";
 
-// UI Components
+// UI Components -----
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import Footer from "../Footer/Footer.jsx";
@@ -19,12 +19,12 @@ import LoginModal from "../LoginModal/LoginModal.jsx";
 import Profile from "../Profile/Profile.jsx";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
 
-// Contexts
+// Contexts -----
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.jsx";
 import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
 
 function App() {
-  // ----- State: Data & UI -----
+  // State: Data & UI -----
   const [weatherData, setWeatherData] = useState({
     city: "",
     type: "",
@@ -37,15 +37,15 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
-  // ----- State: Authentication -----
+  // State: Authentication -----
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
-  // ----- State: Modals -----
+  // State: Modals -----
   const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
 
-  // ----- UI Handlers -----
+  // UI Handlers -----
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
@@ -58,7 +58,7 @@ function App() {
   const handleAddClick = () => setActiveModal("add-garment");
   const closeActiveModal = () => setActiveModal("");
 
-  // ----- Data Handlers: Items -----
+  // Data Handlers: Items -----
   const handleAddItemModalSubmit = (data) => {
     return postItem({
       name: data.name,
@@ -79,13 +79,13 @@ function App() {
       .catch(console.error);
   };
 
-  // ----- Modal Toggles -----
+  // Modal Toggles -----
   const openRegister = () => setShowRegister(true);
   const closeRegister = () => setShowRegister(false);
   const openLogin = () => setShowLogin(true);
   const closeLogin = () => setShowLogin(false);
 
-  // ----- Authentication Logic -----
+  // Authentication Logic -----
   const handleRegister = ({ name, avatar, email, password }) => {
     const payload = { name, email, password };
     if (avatar && avatar.trim() !== "") {
@@ -131,7 +131,7 @@ function App() {
     setCurrentUser(null);
   };
 
-  // ----- Effects: Initial Data Fetch -----
+  // Effects: Initial Data Fetch -----
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((res) => filterWeatherData(res))
@@ -145,7 +145,7 @@ function App() {
       .catch(console.error);
   }, []);
 
-  // ----- Effect: Rehydrate Authentication -----
+  // Effect: Rehydrate Authentication -----
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (!token) return;
@@ -159,7 +159,7 @@ function App() {
       });
   }, []);
 
-  // ----- Rendering -----
+  // Rendering -----
   return (
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
