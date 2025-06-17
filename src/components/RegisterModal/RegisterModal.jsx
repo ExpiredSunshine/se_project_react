@@ -15,14 +15,15 @@ export default function RegisterModal({
     email.trim() !== "" &&
     password.trim() !== "" &&
     name.trim() !== "" &&
-    (() => {
-      try {
-        new URL(avatar);
-        return true;
-      } catch {
-        return false;
-      }
-    })();
+    (avatar.trim() === "" ||
+      (() => {
+        try {
+          new URL(avatar);
+          return true;
+        } catch {
+          return false;
+        }
+      })());
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);

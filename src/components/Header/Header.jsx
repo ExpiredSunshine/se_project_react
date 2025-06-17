@@ -1,10 +1,20 @@
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./Header.css";
 import logo from "../../assets/logo.png";
-import avatar from "../../assets/avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
 
-function Header({ handleAddClick, weatherData }) {
+export default function Header({
+  handleAddClick,
+  weatherData,
+  isLoggedIn,
+  onLoginClick,
+  onRegisterClick,
+  onSignOutClick,
+}) {
+  const currentUser = useContext(CurrentUserContext);
+
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -15,11 +25,29 @@ function Header({ handleAddClick, weatherData }) {
       <Link to="/">
         <img src={logo} className="header__logo" alt="Logo" />
       </Link>
-
       <p className="header__date-and-location">
         {currentDate}, {weatherData.city}
       </p>
+
       <ToggleSwitch />
+      {!isLoggedIn && (
+        <div className="header__auth-buttons">
+          <button
+            type="button"
+            className="header__button header__button--primary"
+            onClick={onRegisterClick}
+          >
+            Sign up
+          </button>
+          <button
+            type="button"
+            className="header__button"
+            onClick={onLoginClick}
+          >
+            Log in
+          </button>
+        </div>
+      )}
       <button
         onClick={handleAddClick}
         type="button"
@@ -27,14 +55,25 @@ function Header({ handleAddClick, weatherData }) {
       >
         + Add Clothes
       </button>
-      <Link to="/profile" className="header__link">
+      {isLoggedIn && currentUser && (
         <div className="header__user-container">
-          <p className="header__username">User Name</p>
-          <img src={avatar} alt="Avatar" className="header__avatar" />
+          <Link to="/profile">
+            <img
+              src={currentUser.data.avatar}
+              alt={currentUser.data.name}
+              className="header__avatar"
+            />
+          </Link>
+          <p className="header__username">{currentUser.data.name}</p>
+          <button
+            type="button"
+            className="header__button"
+            onClick={onSignOutClick}
+          >
+            Sign out
+          </button>
         </div>
-      </Link>
+      )}
     </header>
   );
 }
-
-export default Header;
