@@ -25,6 +25,7 @@ function postItem(item) {
 }
 
 function deleteItem(id) {
+  const token = localStorage.getItem("jwt");
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },

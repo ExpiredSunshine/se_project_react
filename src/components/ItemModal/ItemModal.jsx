@@ -4,7 +4,7 @@ import "./ItemModal.css";
 
 function ItemModal({ activeModal, card, handleCloseClick, onDelete }) {
   const currentUser = useContext(CurrentUserContext);
-  const isOwner = currentUser && card.owner === currentUser._id;
+  const isOwner = currentUser && card.owner === currentUser.data._id;
 
   return (
     <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
