@@ -1,7 +1,7 @@
 .item-card {
   position: relative;
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
   width: 325px;
   height: 328px;
   margin-bottom: 20px;
@@ -13,15 +13,13 @@
 
 .item-card__header {
   position: absolute;
-  top: 15px;
+  margin: 15px 0 0 0;
   left: 0;
   right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
-  padding: 0 12px;
-  pointer-events: none;
+  gap: 10px;
 }
 
 .item-card__name {
@@ -36,11 +34,11 @@
 }
 
 .item-card__like-btn {
-  pointer-events: auto;
-  margin: 0;
+  padding: 0;
+  width: 18px;
+  height: 15px;
   background: url("../../assets/like-inactive.png") center no-repeat;
-  width: 21px;
-  height: 18px;
+  background-size: contain;
   border: none;
   cursor: pointer;
   transition: opacity 0.2s ease-in-out;
