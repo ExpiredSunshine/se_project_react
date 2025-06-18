@@ -3,7 +3,12 @@ import { useContext } from "react";
 import ItemCard from "../ItemCard/ItemCard";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function ClothesSection({ handleAddClick, clothingItems, onCardClick }) {
+function ClothesSection({
+  handleAddClick,
+  clothingItems,
+  onCardClick,
+  onCardLike,
+}) {
   const currentUser = useContext(CurrentUserContext);
 
   return (
@@ -26,7 +31,12 @@ function ClothesSection({ handleAddClick, clothingItems, onCardClick }) {
           if (!isDefault && !isOwner) return null;
           const uniqueKey = isDefault ? `default-${idx}` : `${item._id}-${idx}`;
           return (
-            <ItemCard key={uniqueKey} item={item} onCardClick={onCardClick} />
+            <ItemCard
+              key={uniqueKey}
+              item={item}
+              onCardClick={onCardClick}
+              onCardLike={onCardLike}
+            />
           );
         })}
       </ul>

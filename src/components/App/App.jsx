@@ -14,6 +14,8 @@ import {
   postItem,
   deleteItem,
   updateUserProfile,
+  addCardLike,
+  removeCardLike,
 } from "../../utils/api.js";
 import { signUp, signIn, getCurrentUser } from "../../utils/auth.js";
 
@@ -65,6 +67,21 @@ function App() {
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
+  };
+
+  const handleCardLike = ({ id, isLiked }) => {
+    const token = localStorage.getItem("jwt");
+    const request = isLiked
+      ? removeCardLike(id, token)
+      : addCardLike(id, token);
+    request
+      .then((response) => {
+        const updatedItem = response.data;
+        setClothingItems((items) =>
+          items.map((item) => (item._id === id ? updatedItem : item))
+        );
+      })
+      .catch(console.error);
   };
 
   const handleAddClick = () => setActiveModal("add-garment");
@@ -210,6 +227,7 @@ function App() {
                     weatherData={weatherData}
                     onCardClick={handleCardClick}
                     clothingItems={clothingItems}
+                    onCardLike={handleCardLike}
                   />
                 }
               />
@@ -227,6 +245,7 @@ function App() {
                       clothingItems={clothingItems}
                       onSignOutClick={handleSignOut}
                       onEditProfileClick={openEditProfile}
+                      onCardLike={handleCardLike}
                     />
                   </ProtectedRoute>
                 }

@@ -32,6 +32,20 @@ function deleteItem(id) {
   }).then(checkResponse);
 }
 
+function addCardLike(id, token) {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "PUT",
+    headers: { Authorization: `Bearer ${token}` },
+  }).then(checkResponse);
+}
+
+function removeCardLike(id, token) {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
+  }).then(checkResponse);
+}
+
 function updateUserProfile({ name, avatar }) {
   const token = localStorage.getItem("jwt");
   return fetch(`${baseUrl}/users/me`, {
@@ -44,4 +58,12 @@ function updateUserProfile({ name, avatar }) {
   }).then(checkResponse);
 }
 
-export { getItems, postItem, deleteItem, checkResponse, updateUserProfile };
+export {
+  getItems,
+  postItem,
+  deleteItem,
+  checkResponse,
+  updateUserProfile,
+  addCardLike,
+  removeCardLike,
+};
