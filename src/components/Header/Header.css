@@ -54,7 +54,11 @@
 }
 
 .header__username {
+  max-width: 160px;
+  min-width: 0;
   margin: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .header__link {

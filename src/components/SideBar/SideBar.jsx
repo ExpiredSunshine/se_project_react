@@ -22,28 +22,30 @@ export default function SideBar({
               className="sidebar__avatar"
             />
           ) : (
-            <div className="sidebar__avatar sidebar__avatar--placeholder">
-              {currentUser.data.name.charAt(0).toUpperCase()}
+            <div className="sidebar__avatar">
+              <div className="sidebar__avatar--placeholder">
+                {currentUser.data.name.charAt(0).toUpperCase()}
+              </div>
             </div>
           )}
+          <p className="sidebar__username">{currentUser.data.name}</p>
         </div>
       )}
-      <p className="sidebar__username">{currentUser.data.name}</p>
 
       <div className="sidebar__footer">
         <button
           type="button"
-          className="sidebar__button"
+          className="sidebar__profile-btn"
           onClick={onEditProfileClick}
         >
           Change profile data
         </button>
         <button
           type="button"
-          className="sidebar__button"
+          className="sidebar__logout-btn"
           onClick={onSignOutClick}
         >
-          Sign out
+          Log out
         </button>
       </div>
     </div>
