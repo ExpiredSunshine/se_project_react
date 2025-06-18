@@ -32,4 +32,16 @@ function deleteItem(id) {
   }).then(checkResponse);
 }
 
-export { getItems, postItem, deleteItem, checkResponse };
+function updateUserProfile({ name, avatar }) {
+  const token = localStorage.getItem("jwt");
+  return fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, avatar }),
+  }).then(checkResponse);
+}
+
+export { getItems, postItem, deleteItem, checkResponse, updateUserProfile };

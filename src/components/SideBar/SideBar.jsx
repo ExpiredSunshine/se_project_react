@@ -4,7 +4,11 @@ import "./SideBar.css";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-export default function SideBar({ isLoggedIn, onSignOutClick }) {
+export default function SideBar({
+  isLoggedIn,
+  onSignOutClick,
+  onEditProfileClick,
+}) {
   const currentUser = useContext(CurrentUserContext);
 
   return (
@@ -30,7 +34,7 @@ export default function SideBar({ isLoggedIn, onSignOutClick }) {
         <button
           type="button"
           className="sidebar__button"
-          onClick={onSignOutClick}
+          onClick={onEditProfileClick}
         >
           Change profile data
         </button>

@@ -7,12 +7,17 @@ function Profile({
   onCardClick,
   clothingItems,
   onSignOutClick,
+  onEditProfileClick,
   isLoggedIn,
 }) {
   return (
     <div className="profile">
       <section className="profile__sidebar">
-        <SideBar isLoggedIn={isLoggedIn} onSignOutClick={onSignOutClick} />
+        <SideBar
+          isLoggedIn={isLoggedIn}
+          onSignOutClick={onSignOutClick}
+          onEditProfileClick={onEditProfileClick}
+        />
       </section>
       <section className="profile__clothing-items">
         <ClothesSection

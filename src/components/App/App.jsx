@@ -9,7 +9,12 @@ import {
   defaultClothingItems,
 } from "../../utils/constants.js";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
-import { getItems, postItem, deleteItem } from "../../utils/api.js";
+import {
+  getItems,
+  postItem,
+  deleteItem,
+  updateUserProfile,
+} from "../../utils/api.js";
 import { signUp, signIn, getCurrentUser } from "../../utils/auth.js";
 
 // UI Components -----
@@ -20,6 +25,7 @@ import ItemModal from "../ItemModal/ItemModal.jsx";
 import RegisterModal from "../RegisterModal/RegisterModal.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import LoginModal from "../LoginModal/LoginModal.jsx";
+import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
 import Profile from "../Profile/Profile.jsx";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
 
@@ -49,6 +55,7 @@ function App() {
   // State: Modals -----
   const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [showEditProfile, setShowEditProfile] = useState(false);
 
   // UI Handlers -----
   const handleToggleSwitchChange = () => {
@@ -89,6 +96,8 @@ function App() {
   const closeRegister = () => setShowRegister(false);
   const openLogin = () => setShowLogin(true);
   const closeLogin = () => setShowLogin(false);
+  const openEditProfile = () => setShowEditProfile(true);
+  const closeEditProfile = () => setShowEditProfile(false);
 
   // Authentication Logic -----
   const handleRegister = ({ name, avatar, email, password }) => {
@@ -129,6 +138,14 @@ function App() {
         console.error("Login failed:", err);
       });
   };
+
+  const handleProfileUpdate = ({ name, avatar }) =>
+    updateUserProfile({ name, avatar })
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
+        setShowEditProfile(false);
+      })
+      .catch(console.error);
 
   const handleSignOut = () => {
     localStorage.removeItem("jwt");
@@ -209,6 +226,7 @@ function App() {
                       onCardClick={handleCardClick}
                       clothingItems={clothingItems}
                       onSignOutClick={handleSignOut}
+                      onEditProfileClick={openEditProfile}
                     />
                   </ProtectedRoute>
                 }
@@ -238,6 +256,12 @@ function App() {
             isOpen={showLogin}
             handleCloseClick={closeLogin}
             onLogin={handleLogin}
+          />
+          <EditProfileModal
+            isOpen={showEditProfile}
+            handleCloseClick={() => setShowEditProfile(false)}
+            currentUser={currentUser}
+            onSubmit={handleProfileUpdate}
           />
         </div>
       </CurrentUserContext.Provider>
