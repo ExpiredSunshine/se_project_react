@@ -65,7 +65,7 @@
 .modal__label {
   display: grid;
   margin: 0 0 24px;
-  gap: 4px;
+  gap: 8px;
 }
 
 .modal__legend {
@@ -90,14 +90,23 @@
   border: none;
   border-radius: 4px;
   text-wrap: nowrap;
-  margin: 0;
+  margin: 0 12px 0 0;
   padding: 8px 16px;
-  width: 124px;
   height: 36px;
   background-color: #0000004d;
   color: #ffffff;
+  cursor: pointer;
 }
 
 .modal__submit:enabled {
   background-color: #000;
+}
+
+.modal__secondary-btn {
+  border: none;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff4d;
+  color: rgb(0, 0, 0, 50%);
+  cursor: pointer;
 }

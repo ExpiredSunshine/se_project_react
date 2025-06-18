@@ -5,6 +5,7 @@ export default function RegisterModal({
   handleCloseClick,
   isOpen,
   onRegister,
+  onSwitchToLogin,
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -53,15 +54,22 @@ export default function RegisterModal({
 
   return (
     <ModalWithForm
-      title="Sign up"
-      buttonText="Next"
+      title="Sign Up"
+      buttonText="Sign Up"
       isOpen={isOpen}
       handleCloseClick={handleCloseClick}
       onSubmit={handleSubmit}
       isFormValid={isFormValid}
+      secondaryAction={{
+        text: "or Log In",
+        onClick: () => {
+          handleCloseClick();
+          onSwitchToLogin();
+        },
+      }}
     >
       <label htmlFor="reg-email" className="modal__label">
-        Email{" "}
+        Email *{" "}
         <input
           type="email"
           id="reg-email"
@@ -74,7 +82,7 @@ export default function RegisterModal({
       </label>
 
       <label htmlFor="reg-password" className="modal__label">
-        Password{" "}
+        Password *{" "}
         <input
           type="password"
           id="reg-password"
@@ -87,7 +95,7 @@ export default function RegisterModal({
       </label>
 
       <label htmlFor="reg-name" className="modal__label">
-        Name{" "}
+        Name *{" "}
         <input
           type="text"
           id="reg-name"
@@ -100,7 +108,7 @@ export default function RegisterModal({
       </label>
 
       <label htmlFor="reg-avatar" className="modal__label">
-        Avatar URL{" "}
+        Avatar URL *{" "}
         <input
           type="url"
           id="reg-avatar"

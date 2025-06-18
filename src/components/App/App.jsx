@@ -268,6 +268,7 @@ function App() {
             isOpen={showRegister}
             handleCloseClick={closeRegister}
             onRegister={handleRegister}
+            onSwitchToLogin={openLogin}
           />
           <LoginModal
             isOpen={showLogin}
