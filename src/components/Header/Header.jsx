@@ -44,14 +44,14 @@ export default function Header({
         <div className="header__auth-buttons">
           <button
             type="button"
-            className="header__button header__button--primary"
+            className="header__signup-btn"
             onClick={onRegisterClick}
           >
             Sign up
           </button>
           <button
             type="button"
-            className="header__button"
+            className="header__login-btn"
             onClick={onLoginClick}
           >
             Log in
@@ -77,8 +77,10 @@ export default function Header({
                 className="header__avatar"
               />
             ) : (
-              <div className="header__avatar header__avatar--placeholder">
-                {currentUser.data.name.charAt(0).toUpperCase()}
+              <div className="header__avatar ">
+                <div className="header__avatar--placeholder">
+                  {currentUser.data.name.charAt(0).toUpperCase()}
+                </div>
               </div>
             )}
           </Link>
