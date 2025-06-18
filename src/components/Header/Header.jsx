@@ -18,7 +18,6 @@ export default function Header({
   isLoggedIn,
   onLoginClick,
   onRegisterClick,
-  onSignOutClick,
 }) {
   // Current user from context -----
   const currentUser = useContext(CurrentUserContext);
@@ -70,6 +69,7 @@ export default function Header({
 
       {isLoggedIn && currentUser && (
         <div className="header__user-container">
+          <p className="header__username">{currentUser.data.name}</p>
           <Link to="/profile">
             {currentUser.data.avatar ? (
               <img
@@ -83,16 +83,6 @@ export default function Header({
               </div>
             )}
           </Link>
-
-          <p className="header__username">{currentUser.data.name}</p>
-
-          <button
-            type="button"
-            className="header__button"
-            onClick={onSignOutClick}
-          >
-            Sign out
-          </button>
         </div>
       )}
     </header>

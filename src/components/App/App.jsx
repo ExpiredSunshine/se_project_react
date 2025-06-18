@@ -198,9 +198,11 @@ function App() {
                     isAuthChecked={isAuthChecked}
                   >
                     <Profile
+                      isLoggedIn={isLoggedIn}
                       handleAddClick={handleAddClick}
                       onCardClick={handleCardClick}
                       clothingItems={clothingItems}
+                      onSignOutClick={handleSignOut}
                     />
                   </ProtectedRoute>
                 }
