@@ -59,16 +59,15 @@ export default function Header({
         </div>
       )}
 
-      <button
-        type="button"
-        className="header__add-clothes-btn"
-        onClick={handleAddClick}
-      >
-        + Add Clothes
-      </button>
-
       {isLoggedIn && currentUser && (
         <div className="header__user-container">
+          <button
+            type="button"
+            className="header__add-clothes-btn"
+            onClick={handleAddClick}
+          >
+            + Add Clothes
+          </button>
           <p className="header__username">{currentUser.data.name}</p>
           <Link to="/profile">
             {currentUser.data.avatar ? (

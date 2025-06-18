@@ -3,7 +3,11 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
 // Utils & API -----
-import { coordinates, APIkey } from "../../utils/constants.js";
+import {
+  coordinates,
+  APIkey,
+  defaultClothingItems,
+} from "../../utils/constants.js";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 import { getItems, postItem, deleteItem } from "../../utils/api.js";
 import { signUp, signIn, getCurrentUser } from "../../utils/auth.js";
@@ -32,7 +36,7 @@ function App() {
     condition: "",
     isDay: true,
   });
-  const [clothingItems, setClothingItems] = useState([]);
+  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -142,7 +146,9 @@ function App() {
 
   useEffect(() => {
     getItems()
-      .then(({ data }) => setClothingItems(data.reverse()))
+      .then(({ data }) =>
+        setClothingItems([...defaultClothingItems, ...data.reverse()])
+      )
       .catch(console.error);
   }, []);
 

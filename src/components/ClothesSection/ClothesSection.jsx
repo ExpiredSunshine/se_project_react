@@ -20,11 +20,13 @@ function ClothesSection({ handleAddClick, clothingItems, onCardClick }) {
       </div>
 
       <ul className="clothes-section__list">
-        {clothingItems.map((item) => {
+        {clothingItems.map((item, idx) => {
+          const isDefault = item.owner === undefined;
           const isOwner = currentUser && item.owner === currentUser.data._id;
-          if (!isOwner) return null;
+          if (!isDefault && !isOwner) return null;
+          const uniqueKey = isDefault ? `default-${idx}` : `${item._id}-${idx}`;
           return (
-            <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+            <ItemCard key={uniqueKey} item={item} onCardClick={onCardClick} />
           );
         })}
       </ul>
