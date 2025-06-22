@@ -110,7 +110,6 @@ function App() {
   const openLogin = () => setShowLogin(true);
   const closeLogin = () => setShowLogin(false);
   const openEditProfile = () => setShowEditProfile(true);
-  const closeEditProfile = () => setShowEditProfile(false);
 
   // Authentication Logic -----
   const handleRegister = ({ name, avatar, email, password }) => {

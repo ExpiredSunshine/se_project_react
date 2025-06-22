@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./ItemModal.css";
+import useModalClose from "../../utils/useModalClose";
 
 function ItemModal({ activeModal, card, handleCloseClick, onDelete }) {
   const currentUser = useContext(CurrentUserContext);
   const isOwner = currentUser && card.owner === currentUser.data._id;
+  useModalClose(activeModal === "preview", handleCloseClick);
 
   return (
     <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
