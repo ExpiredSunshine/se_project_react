@@ -1,10 +1,15 @@
 const baseUrl = "http://localhost:3001";
 
-function checkResponse(res) {
-  if (!res.ok) {
-    return Promise.reject(`Error: ${res.status}`);
+function checkResponse(res, customErrorMessage) {
+  if (res.ok) {
+    return res.json();
   }
-  return res.json();
+
+  const baseMessage = `Error:${res.status}`;
+  const fullMessage = customErrorMessage
+    ? `${customErrorMessage} (${baseMessage})`
+    : baseMessage;
+  return Promise.reject(fullMessage);
 }
 
 function getItems() {
