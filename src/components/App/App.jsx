@@ -174,11 +174,16 @@ function App() {
       .catch(console.error);
   }, []);
 
+  // Effects: Fetch & Sort Cards -----
   useEffect(() => {
     getItems()
       .then(({ data }) => {
-        const userItems = data.filter((item) => !!item.owner);
+        const userItems = data
+          .filter((item) => !!item.owner)
+          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
         const defaultItems = data.filter((item) => !item.owner);
+
         setClothingItems([...userItems, ...defaultItems]);
       })
       .catch(console.error);
