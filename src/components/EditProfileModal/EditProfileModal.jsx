@@ -1,5 +1,5 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useId } from "react";
 
 export default function EditProfileModal({
   handleCloseClick,
@@ -9,6 +9,7 @@ export default function EditProfileModal({
 }) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
+  const idPrefix = useId();
 
   useEffect(() => {
     if (isOpen && currentUser) {
@@ -59,11 +60,11 @@ export default function EditProfileModal({
       onSubmit={handleSubmit}
       isFormValid={isFormValid}
     >
-      <label htmlFor="reg-name" className="modal__label">
+      <label htmlFor={`${idPrefix}-red-name`} className="modal__label">
         Name{" "}
         <input
           type="text"
-          id="reg-name"
+          id={`${idPrefix}-red-name`}
           className="modal__input"
           placeholder="Name"
           required
@@ -72,11 +73,11 @@ export default function EditProfileModal({
         />
       </label>
 
-      <label htmlFor="reg-avatar" className="modal__label">
+      <label htmlFor={`${idPrefix}-red-avatar`} className="modal__label">
         Avatar URL{" "}
         <input
           type="url"
-          id="reg-avatar"
+          id={`${idPrefix}-red-avatar`}
           className="modal__input"
           placeholder="Avatar URL"
           value={avatar}
