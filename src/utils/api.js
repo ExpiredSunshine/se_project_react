@@ -1,4 +1,6 @@
-const baseUrl = "http://localhost:3001";
+const baseUrl =   process.env.NODE_ENV === "production"
+? "https://api.wtwrac.vlad.md"
+: "http://localhost:3001";
 
 function checkResponse(res, customErrorMessage) {
   if (res.ok) {

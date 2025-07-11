@@ -1,5 +1,7 @@
 import { checkResponse } from "./api";
-const baseUrl = "http://localhost:3001";
+const baseUrl = process.env.NODE_ENV === "production"
+? "https://api.wtwrac.vlad.md"
+: "http://localhost:3001";
 
 export const signUp = (data) => {
   return fetch(`${baseUrl}/signup`, {
