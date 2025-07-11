@@ -1,7 +1,7 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useState } from "react";
 
-export default function LoginModal({ isOpen, handleCloseClick, onLogin }) {
+export default function LoginModal({ isOpen, handleCloseClick, onLogin, onSwitchToRegister }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -33,6 +33,13 @@ export default function LoginModal({ isOpen, handleCloseClick, onLogin }) {
       handleCloseClick={handleCloseClick}
       onSubmit={handleSubmit}
       isFormValid={isFormValid}
+      secondaryAction={{
+        text: "or Sign Up",
+        onClick: () => {
+          handleCloseClick();
+          onSwitchToRegister();
+        },
+      }}
     >
       <label htmlFor="login-email" className="modal__label">
         Email

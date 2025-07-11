@@ -278,6 +278,7 @@ function App() {
             isOpen={showLogin}
             handleCloseClick={closeLogin}
             onLogin={handleLogin}
+            onSwitchToRegister={openRegister}
           />
           <EditProfileModal
             isOpen={showEditProfile}
