@@ -26,7 +26,7 @@ function ClothesSection({
 
       <ul className="clothes-section__list">
         {clothingItems.map((item, idx) => {
-          const isDefault = item.owner === undefined;
+          const isDefault = item.owner === null || item.owner === undefined;
           const isOwner = currentUser && item.owner === currentUser.data._id;
           if (!isDefault && !isOwner) return null;
           const uniqueKey = isDefault ? `default-${idx}` : `${item._id}-${idx}`;
